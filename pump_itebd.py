@@ -106,20 +106,21 @@ def tebd_rice_mele(t,u,V,N,B,s,chi):
     
 if __name__ == "__main__":
     chi = 10
-    N = 10
-    
-    V = 0.2
+    N = 10    
+    V = 0.
     t0 = 1
-    B,s = init_cdw_mps(2)
     
+    B,s = init_cdw_mps(2)
     phi_list = np.arange(0,2*np.pi,0.025)
     n = []
     
     du = []
     dt = []
+    
     for phi in phi_list:
         u = [np.sin(phi),-np.sin(phi)]
         t = [1.0, t0 + np.cos(phi)]
+
         du.append(u[0]-u[1])
         dt.append(t[0]-t[1])
         
@@ -128,14 +129,14 @@ if __name__ == "__main__":
         n.append(np.sum((s[0]**2)*nr))
         print "phi=",phi,"n_right=",n[-1]-n[0]
 
-pl.figure(figsize=(9,3))
-pl.subplot(121)
-pl.plot(np.array(phi_list)/2./np.pi,n-n[0])
-pl.xlabel('$\\phi/2\\pi$')
-pl.ylabel('$\\Delta Q$')
-pl.subplot(122)
-pl.scatter(du, dt)
-pl.scatter(0,0)
-pl.xlabel('$\Delta u$')
-pl.ylabel('$\Delta t$')
-pl.show()    
+    pl.figure(figsize=(9,3))
+    pl.subplot(121)
+    pl.plot(np.array(phi_list)/2./np.pi,n-n[0])
+    pl.xlabel('$\\phi/2\\pi$')
+    pl.ylabel('$\\Delta Q$')
+    pl.subplot(122)
+    pl.scatter(du, dt)
+    pl.scatter(0,0)
+    pl.xlabel('$\Delta u$')
+    pl.ylabel('$\Delta t$')
+    pl.show()    
